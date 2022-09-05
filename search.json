@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "testnbdev",
+    "section": "",
+    "text": "This file will become your README and also the index of your documentation."
+  },
+  {
+    "objectID": "index.html#install",
+    "href": "index.html#install",
+    "title": "testnbdev",
+    "section": "Install",
+    "text": "Install\npip install testnbdev"
+  },
+  {
+    "objectID": "index.html#how-to-use",
+    "href": "index.html#how-to-use",
+    "title": "testnbdev",
+    "section": "How to use",
+    "text": "How to use\nFill me in please! Don’t forget code examples:\n\n1+1\n\n2"
+  },
+  {
+    "objectID": "grid.html",
+    "href": "grid.html",
+    "title": "Grid helpers",
+    "section": "",
+    "text": "source\n\narr_to_dict\n\n arr_to_dict (arr)\n\ntakes in an numpy array or list of lists (tuple of tuples) and returns a dictionary with indices, values Example arr_to_dict([[‘a’,‘b’],[‘c’,‘#’]]) == {(0, 0): ‘a’, (0, 1): ‘b’, (1, 0): ‘c’, (1, 1): ‘#’}\n\nassert arr_to_dict([[1,2,3]]) == {(0, 0): 1, (0, 1): 2, (0, 2): 3}\nassert arr_to_dict([[1,2], [3,4]]) == {(0, 0): 1, (0, 1): 2, (1, 0): 3, (1, 1): 4}\nassert arr_to_dict(((1,2), (3,4))) == {(0, 0): 1, (0, 1): 2, (1, 0): 3, (1, 1): 4}\nassert arr_to_dict([['a','b'],['c','#']]) == {(0, 0): 'a', (0, 1): 'b', (1, 0): 'c', (1, 1): '#'}\nassert arr_to_dict('abc') == None\n\nonly works with list of lists or np.ndarray. Use grid_to_dict if input is a string grid \n\n\n\nsource\n\n\ngrid_to_dict\n\n grid_to_dict (grid)\n\n\nassert grid_to_dict([[1,2,3],[4,5,6]]) == {(0, 0): 1, (0, 1): 2, (0, 2): 3, (1, 0): 4, (1, 1): 5, (1, 2): 6}\nassert grid_to_dict('1r3\\n456') == {(0, 0): '1', (0, 1): 'r', (0, 2): '3', (1, 0): '4', (1, 1): '5', (1, 2): '6'}\n\n\nsource\n\n\nneighbors\n\n neighbors (i, diag=False, inc_self=False)\n\ndetermine the neighbors, returns a set with neighboring tuples {(0,1)} if inc_self: returns self in results if diag: return diagonal moves as well\n\n# 4 and 5 tuples\nassert neighbors((0,0), inc_self=False, diag=False) == {(0, 1), (0, -1), (1, 0), (-1, 0)}\nassert neighbors((0,0), inc_self=True, diag=False) == {(0, 1), (0, -1), (1, 0), (-1, 0), (0, 0)}\n# # 8 and 9 tuples\nassert neighbors((0,0), inc_self=False, diag=True) == {(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)}\nassert neighbors((0,0), inc_self=True, diag=True) == {(1, 1), (1, -1), (1, 0), (0, 1), (0, -1), (0, 0), (-1, 1), (-1, -1), (-1, 0)}\n\n\nsource\n\n\narr_neighbors\n\n arr_neighbors (arr, diag=False, inc_self=False)\n\nReturns a dictionary with index: set of neighbor indices Parameters: diag to include diagonal neighbors, inc_self to include self in result list Usage: for index, neighbor_indices in aoc.arr_neighbors(arr).items():\n\na = np.arange(9).reshape(3,3).astype(object)\nprint(a)\narr_neighbors(a)\n\n[[0 1 2]\n [3 4 5]\n [6 7 8]]\n\n\n{(0, 0): {(0, 1), (1, 0)},\n (0, 1): {(0, 0), (0, 2), (1, 1)},\n (0, 2): {(0, 1), (1, 2)},\n (1, 0): {(0, 0), (1, 1), (2, 0)},\n (1, 1): {(0, 1), (1, 0), (1, 2), (2, 1)},\n (1, 2): {(0, 2), (1, 1), (2, 2)},\n (2, 0): {(1, 0), (2, 1)},\n (2, 1): {(1, 1), (2, 0), (2, 2)},\n (2, 2): {(1, 2), (2, 1)}}\n\n\n\narr_neighbors([[1,2,3],[3,4,4]])\n\n{(0, 0): {(0, 1), (1, 0)},\n (0, 1): {(0, 0), (0, 2), (1, 1)},\n (0, 2): {(0, 1), (1, 2)},\n (1, 0): {(0, 0), (1, 1)},\n (1, 1): {(0, 1), (1, 0), (1, 2)},\n (1, 2): {(0, 2), (1, 1)}}\n\n\n\nsource\n\n\niterate\n\n iterate (grid)\n\n\nsource\n\n\ndimensions\n\n dimensions (obj, axis=0)\n\ntakes an iterable of iterables and returns a namedtuple with minima, maxima and range for example a 2d numpy array dim.min, dim.max and dim.range\n\nmatrix = [[1,2,3],[10,9,8]]\nassert dimensions(matrix) == Dim(min=(1, 2, 3), max=(10, 9, 8), range=(9, 7, 5))\nassert dimensions(np.array(matrix)) == Dim(min=(1, 2, 3), max=(10, 9, 8), range=(9, 7, 5))\ndimensions([[1,2,3],[10,9,8]])\n\nDim(min=(1, 2, 3), max=(10, 9, 8), range=(9, 7, 5))\n\n\n\nsource\n\n\npositive\n\n positive (*args)\n\ntakes 1 or multiple lists of n coordinates and returns it normalized (getting rid of negatives) Only works along rows! (axis=0)\npositive() will only make changes along axis where negative values are detected\n\nassert positive([(0,0,-4),(0,-10,0),(0,0,0)]) == [(0, 10, 0), (0, 0, 4), (0, 10, 4)]\n\n\nsource\n\n\nmanhattan\n\n manhattan (a, b)\n\n\nassert manhattan((10,10),(-1,11)) == 12\nassert manhattan((0,5),(-1,8)) == 4\nassert manhattan((10,10,10),(-1,11,12)) == 14\nassert manhattan((-1,-2,-3,-4),(3,6,2,-1)) == 20\n\n\nsource\n\n\nconv1d\n\n conv1d (arr, conv_shape, mode='same', padding=None, pad_dir='center')\n\nReturns a list of kernel views of a string or list mode == ‘valid’: returns only results where the kernel fits mode == ‘same’: return the same amount of items as original when mode ==‘same’, default padding is the outer value\n\nassert conv1d(\"12345\",3,mode='valid' == ['123', '234', '345'])\n\nnot fully checked yet\n\n\n\nsource\n\n\nconv2d\n\n conv2d (arr, conv_shape, mode='valid', padding=None, pad_dir='center')\n\nReturns a list of kernel views of a string or list mode == ‘valid’: returns only results where the kernel fits mode == ‘same’: return the same amount of items as original when mode ==‘same’, default padding is the outer value\n\nconv2d(np.array([np.arange(9).reshape(3,3)]), conv_shape=2)\n\nnot fully checked yet\n\n\n[]"
+  },
+  {
+    "objectID": "maze.html",
+    "href": "maze.html",
+    "title": "Advent of Code Utils",
+    "section": "",
+    "text": "source\n\n\n\n bfs (connections, start, goal=None, verbose=False)\n\nRequires a connections dict with tuples with neighbors per node. Or a connections function returning neighbors per node\nReturns if goal == None: return dict of locations with neighbor closest to start elif goal found: returns path to goal else: returns False\n\ndef test_bfs(input):\n    if input < 0: return (0,)\n    elif input > 25: return (25,)\n    else:\n        return (input-1, input+1, input + 20, input -20)\nbfs(test_bfs, 0,goal=10) == [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]\n\nFalse\n\n\n\nsource\n\n\n\n\n dijkstra (connections, start, goal=None)\n\nRequires a dict with as values a LIST of tuples (neighbor, weight) Or a function returning a list of tuples with neighbors and weights per node\nReturns if goal == None: return all paths from start elif goal found: returns path to goal else: returns False\n\ntest_dict = {1:[(2,1),(5,5)],\n            2:[(1,1),(3,1)],\n            3:[(2,1),(10,10)],\n            5:[(1,1),(10,1)],\n            10:[(3,1),(5,1)]\n            }\nassert dijkstra(test_dict, 1,goal=10) == ([1, 5, 10], 6)\n\n\nsource\n\n\n\n\n get_path (parents, start, goal)\n\n\nsource\n\n\n\n\n dfs (graph, start)"
+  },
+  {
+    "objectID": "core.html",
+    "href": "core.html",
+    "title": "core",
+    "section": "",
+    "text": "source\n\nfoo\n\n foo ()"
+  }
+]
