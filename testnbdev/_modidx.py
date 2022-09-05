@@ -5,4 +5,4 @@ d = { 'settings': { 'branch': 'master',
                 'doc_host': 'https://jvanelteren.github.io',
                 'git_url': 'https://github.com/jvanelteren/testnbdev',
                 'lib_path': 'testnbdev'},
-  'syms': {'testnbdev\\core': {'testnbdev\\core.foo': ('core.html#foo', 'testnbdev\\core.py')}}}
+  'syms': {'testnbdev.core': {'testnbdev.core.foo': ('core.html#foo', 'testnbdev/core.py')}}}
